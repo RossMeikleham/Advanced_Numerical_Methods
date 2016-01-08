@@ -10,5 +10,5 @@ install:
 
 script:
     - cd build_tests
-    - pwd
+    - ls
     - ./Matrix_Tests
