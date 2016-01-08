@@ -1,9 +1,13 @@
+os:
+    - linux
+    - osx
+
 
 install:
-    ./download_cpp_dependencies.sh
-    ./build_cpp.sh
-    ./build_tests_cpp.sh
+    - ./download_cpp_dependencies.sh
+    - ./build_cpp.sh
+    - ./build_tests_cpp.sh
 
 script:
-    cd build_tests
-    ./Matrix_Tests
+    - cd build_tests
+    - ./Matrix_Tests
