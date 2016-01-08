@@ -1,0 +1,10 @@
+language: c++
+
+build:
+    ./download_cpp_dependencies.sh
+    ./build_cpp.sh
+    ./build_tests_cpp.sh
+
+test:
+    cd build_tests
+    ./Matrix_Tests

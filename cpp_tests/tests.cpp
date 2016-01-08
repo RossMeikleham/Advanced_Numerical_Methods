@@ -1,0 +1,176 @@
+#define CATCH_CONFIG_MAIN
+
+#include "../include/catch.hpp"
+#include "../cpp_src/matrix.h"
+#include "../cpp_src/matrix_factorisations/gram_schmidt.h"
+
+#include <vector>
+
+TEST_CASE("Extracting Columns", "[matrix]") {
+    double myints[] = {1,2,3,4,5,6,7,8,9};
+    std::vector<double> v(myints, myints + sizeof(myints) / sizeof(double));  
+    auto m = matrix<double>(v, 3);
+   
+    SECTION("Extracting middle column from 3x3 matrix") {
+        double myints2[] = {2, 5, 8};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 1);
+
+        REQUIRE(m.col(1) == n);    
+    }
+
+    SECTION("Extracting Most Left Column") {
+        double myints2[] = {1, 4, 7};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 1);
+
+        REQUIRE(m.col(0) == n);    
+    } 
+   
+    SECTION("Extracting Right Most Column") {
+        double myints2[] = {3, 6, 9};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 1);
+
+        REQUIRE(m.col(2) == n);    
+    } 
+}
+
+
+TEST_CASE("Extracting Rows", "[matrix]") {
+    double myints[] = {1,2,3,4,5,6,7,8,9};
+    std::vector<double> v(myints, myints + sizeof(myints) / sizeof(double));  
+    auto m = matrix<double>(v, 3);
+   
+    SECTION("Extracting middle row from 3x3 matrix") {
+        double myints2[] = {4, 5, 6};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 3);
+
+        REQUIRE(m.row(1) == n);    
+    }
+
+    SECTION("Extracting Top Row") {
+        double myints2[] = {1, 2, 3};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 3);
+
+        REQUIRE(m.row(0) == n);    
+    } 
+   
+    SECTION("Extracting Bottom Row") {
+        double myints2[] = {7, 8, 9};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 3);
+
+        REQUIRE(m.row(2) == n);    
+    } 
+}
+
+
+TEST_CASE("Adding", "[matrix]") {
+    double myints[] = {1,2,3,4,5,6,7,8,9};
+    std::vector<double> v(myints, myints + sizeof(myints) / sizeof(double));  
+    auto m = matrix<double>(v, 3);
+   
+    SECTION("Identity Adding") {
+        double myints2[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 3);
+
+        REQUIRE(m == m + n);    
+    }
+    
+    SECTION("Identity Adding 2") {
+        double myints2[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 3);
+
+        auto m2 = m;
+        m.add(n);
+        REQUIRE(m == m2);    
+    }
+    
+    SECTION("Adding Numbers") {
+        double myints2[] = {23, 44, 92, 4324, 6536, 4312, 212, 213431, 87588};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 3);
+
+        for (uint64_t i = 0; i < 9; i++) {
+            v[i] += v2[i];  
+        }
+
+        auto sum_m = matrix<double>(v, 3);
+        REQUIRE(m + n == sum_m); 
+    
+    }
+
+    SECTION("Adding Numbers 2") {
+        double myints2[] = {23, 44, 92, 4324, 6536, 4312, 212, 213431, 87588};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 3);
+
+        for (uint64_t i = 0; i < 9; i++) {
+            v[i] += v2[i];  
+        }
+
+        auto sum_m = matrix<double>(v, 3);
+        m.add(n);
+        REQUIRE(m == sum_m); 
+    }
+
+}
+
+
+TEST_CASE("Subtracting", "[matrix]") {
+    double myints[] = {1,2,3,4,5,6,7,8,9};
+    std::vector<double> v(myints, myints + sizeof(myints) / sizeof(double));  
+    auto m = matrix<double>(v, 3);
+   
+    SECTION("Identity Subtracting") {
+        double myints2[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 3);
+
+        REQUIRE(m == m - n);    
+    }
+    
+    SECTION("Identity Subtracting 2") {
+        double myints2[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 3);
+
+        auto m2 = m;
+        m.sub(n);
+        REQUIRE(m == m2);    
+    }
+    
+    SECTION("Subtracting Numbers") {
+        double myints2[] = {39749832, 921374, 4, 3276, 2789321, 4289, 2304, 342, 742};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 3);
+
+        for (uint64_t i = 0; i < 9; i++) {
+            v[i] -= v2[i];  
+        }
+
+        auto sum_m = matrix<double>(v, 3);
+        REQUIRE(m - n == sum_m); 
+    
+    }
+
+    SECTION("Adding Numbers 2") {
+        double myints2[] = {39749832, 921374, 4, 3276, 2789321, 4289, 2304, 342, 742};   
+        std::vector<double> v2(myints2, myints2 + sizeof(myints2) / sizeof(double));
+        auto n = matrix<double>(v2, 3);
+
+        for (uint64_t i = 0; i < 9; i++) {
+            v[i] -= v2[i];  
+        }
+
+        auto sum_m = matrix<double>(v, 3);
+        m.sub(n);
+        REQUIRE(m == sum_m); 
+    }
+
+}
