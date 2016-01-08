@@ -7,5 +7,8 @@ file(GLOB_RECURSE test_sources cpp_tests/*.cpp)
 add_executable(Matrix ${sources})
 add_executable(Matrix_Tests ${test_sources})
 
-target_compile_options(Matrix PUBLIC -std=c++11 -fopenmp -Wall)
-target_compile_options(Matrix_Tests PUBLIC -std=c++11 -fopenmp -Wall)
+target_compile_options(Matrix PUBLIC -fopenmp -lgomp-std=c++11 -Wall)
+target_link_libraries(Matrix PUBLIC -fopenmp)
+
+target_compile_options(Matrix_Tests PUBLIC -fopenmp -std=c++11 -Wall)
+target_link_libraries(Matrix_Tests PUBLIC -fopenmp)
