@@ -1,4 +1,7 @@
 # Advanced_Numerical_Methods
+
+[![Build Status](https://travis-ci.org/RossMeikleham/Advanced_Numerical_Methods.svg?branch=master)](https://travis-ci.org/RossMeikleham/Advanced_Numerical_Methods)
+
 Work for my Mathematics Master's course in Advanced Numerical Methods.
 The class is focused on implementing methods in MATLAB, I'm also adding implementations
 in C++ with OpenMP to parallelize some of the algorithms.
