@@ -1,10 +1,9 @@
-language: c++
 
-build:
+install:
     ./download_cpp_dependencies.sh
     ./build_cpp.sh
     ./build_tests_cpp.sh
 
-test:
+script:
     cd build_tests
     ./Matrix_Tests
