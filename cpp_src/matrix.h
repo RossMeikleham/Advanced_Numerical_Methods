@@ -177,9 +177,9 @@ template <class Type> class matrix {
      
     void scalarMult(Type const &c) {
         #pragma omp parallel for
-        for (int y = 0; y < m_m; y++) {
+        for (uint64_t y = 0; y < m_m; y++) {
             #pragma omp parallel for
-            for (int x = 0; x < m_n; x++) {
+            for (uint64_t x = 0; x < m_n; x++) {
                 elements[(y * m_n) + x] *= c;
             }
         }
@@ -194,7 +194,7 @@ template <class Type> class matrix {
         elements.resize(orig_sz + append_sz);
         
         #pragma omp parallel for
-        for (int i = 0; i < append_sz; i++) {
+        for (uint64_t i = 0; i < append_sz; i++) {
             elements[orig_sz + i] = m2.elements[i];
         }
 

@@ -1,4 +1,5 @@
-% Gram Schmidt Process of Factorising a Given Matrix
+% Modified Gram Schmidt Process of Factorising a Given Matrix
+% for numerical stability
 function [q,r] = gram_schmidt(a) 
     rows = size(a, 1);
     cols = size(a, 2);
@@ -11,16 +12,14 @@ function [q,r] = gram_schmidt(a)
         % Calc R-Values for n-th column
         for i=1:n-1
             r(i, n) = q(:, i)' * v;
-        end
-        for i=1:n-1
-            v = v - (r(i, n) * q(:, i)); 
+            v = v - r(i, n) * q(:, i); 
         end
   
         r(n, n) = norm(v);
 
         % Calc Q-Values for n-th column
         q(:, n) = v / r(n, n);
-    end 
+    end
 end  
 
 [q, r] = gram_schmidt([1 1 0; 1 0 1; 0 1 1]);

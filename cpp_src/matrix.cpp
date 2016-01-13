@@ -1,5 +1,6 @@
 #include "matrix.h"
 #include "matrix_factorisations/gram_schmidt.h"
+#include "matrix_factorisations/modified_gram_schmidt.h"
 #include <complex>
 
 int main(int agrc, char *argv[]) {
@@ -67,6 +68,13 @@ int main(int agrc, char *argv[]) {
     std::get<0>(gs).print();
     std::cout << std::endl;
     std::get<1>(gs).print();
+    std::cout << std::endl;
+
+    
+    auto gs2 = modified_gram_schmidt(z);
+    std::get<0>(gs2).print();
+    std::cout << std::endl;
+    std::get<1>(gs2).print();
     std::cout << std::endl;
 
     return 0;
