@@ -12,6 +12,3 @@ target_compile_options(Matrix_Tests PUBLIC -fopenmp -std=c++11 -Wall)
 
 target_link_libraries(Matrix  PUBLIC -fopenmp)
 target_link_libraries(Matrix_Tests PUBLIC -fopenmp)
-
-
-
