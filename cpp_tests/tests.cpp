@@ -3,6 +3,7 @@
 #include "../include/catch.hpp"
 #include "../cpp_src/matrix.h"
 #include "../cpp_src/matrix_factorisations/gram_schmidt.h"
+#include "../cpp_src/matrix_factorisations/gaussian_elimination.h"
 
 #include <vector>
 
@@ -174,3 +175,39 @@ TEST_CASE("Subtracting", "[matrix]") {
     }
 
 }
+
+
+
+TEST_CASE("Naive Gauss Elimination", "[matrix]") {
+    double ax_a[] = {1, 5, -2, -7};
+    double b_a[] = {7, -5};
+
+    std::vector<double> ax_v(ax_a, ax_a + sizeof(ax_a) / sizeof(double));  
+    std::vector<double> b_v(b_a, b_a + sizeof(b_a) / sizeof(double));  
+    
+    auto ax = matrix<double>(ax_v, 2);
+    auto b = matrix<double>(b_v, 1);
+  
+    SECTION("Naive Gauss Elim") {
+        double soln_a[] = {1, 5, -2, 3};
+        auto soln = matrix<double>(std::vector<double>(soln_a, soln_a + sizeof(soln_a) / sizeof(double)), 2);
+        auto result = naive_gauss_elimination(ax);
+       
+        REQUIRE(result == soln);
+
+    }
+
+ 
+    SECTION("Naive Gauss Solving") {
+        double soln_a[] = {-8, 3};
+        auto soln = matrix<double>(std::vector<double>(soln_a, soln_a + sizeof(soln_a) / sizeof(double)), 1); 
+        auto result = naive_gauss_solve(ax, b);
+        
+        REQUIRE(result == soln);    
+    }
+
+}
+
+
+
+
