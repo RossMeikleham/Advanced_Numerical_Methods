@@ -1,4 +1,3 @@
-
 % Modified Gram Schmidt Process of Factorising a Given Matrix
 % for numerical stability
 function [q,r] = modified_gram_schmidt(a) 
@@ -32,3 +31,4 @@ r_expected = [sqrt(2), 1/sqrt(2), 1/sqrt(2);
 tol = eps(1000)
 q - q_expected < tol
 r - r_expected < tol
+

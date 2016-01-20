@@ -22,11 +22,7 @@ std::tuple<matrix<Type>, matrix<Type>> gram_schmidt(matrix<Type> a) {
            auto temp = q[i];
            temp.transpose();
            r.set(i, n, (temp * v).singleton());
-       }
-
-       for (uint64_t i = 0; i < n; i++) {
-           v.sub(r.get(i, n) * q[i]);
-            
+           v.sub(r.get(i, n) * q[i]); 
        } 
 
         r.set(n, n, v.abs());
