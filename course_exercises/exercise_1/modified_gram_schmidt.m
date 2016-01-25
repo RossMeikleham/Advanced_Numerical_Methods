@@ -18,17 +18,4 @@ function [q,r] = modified_gram_schmidt(a)
     end
 end  
 
-[q, r] = modified_gram_schmidt([1 1 0; 1 0 1; 0 1 1])
-
-q_expected = [1/sqrt(2) 1/sqrt(6) -1/sqrt(3); 
-              1/sqrt(2) -1/sqrt(6) 1/sqrt(3); 
-              0 2/sqrt(6) 1/sqrt(3)];
-
-r_expected = [sqrt(2), 1/sqrt(2), 1/sqrt(2);
-              0, 3/sqrt(6), 1/sqrt(6);
-              0, 0, 2/sqrt(3)];
-
-tol = eps(1000)
-q - q_expected < tol
-r - r_expected < tol
 

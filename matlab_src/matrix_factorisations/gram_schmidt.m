@@ -10,9 +10,7 @@ function [q,r] = gram_schmidt(a)
         v = a(:, n);
         % Calc R-Values for n-th column
         for i=1:n-1
-            r(i, n) = q(:, i)' * v;
-        end
-        for i=1:n-1
+            r(i, n) = q(:, i)' * a(:, i);
             v = v - (r(i, n) * q(:, i)); 
         end
   

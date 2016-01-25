@@ -16,19 +16,17 @@ std::tuple<matrix<Type>, matrix<Type>> modified_gram_schmidt(matrix<Type> a) {
     for (uint64_t n = 0; n < a.n(); n++) {
        auto an = a.col(n);
        auto v = an;
-
+        
+       r.set(n, n, v.abs());
+       q[n] = v / r.get(n, n);
+        
        // Calc R-Values for n-th column 
        for (uint64_t i = 0; i < n; i++) {
            auto temp = q[i];
            temp.transpose();
-           r.set(i, n, (temp * an).singleton());
+           r.set(i, n, (temp * v).singleton());
            v.sub(r.get(i, n) * q[i]);
        } 
-
-        r.set(n, n, v.abs());
-
-       // Calc Q-Values for n-th column
-       q[n] = v / r.get(n, n);
     }
 
     for (uint64_t i = 1; i < a.n(); i++) {
