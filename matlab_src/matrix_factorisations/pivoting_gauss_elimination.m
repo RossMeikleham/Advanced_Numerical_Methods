@@ -9,9 +9,7 @@ function a = pivoting_gauss_elimination(a)
         %topmost row which hasn't been considered 
         [_, r] = max(arrayfun(@abs, a(i:rows,i))); 
         r = r + (i - 1);
-        temp = a(r, :);
-        a(r, :) = a(i, :);
-        a(i, :) = temp;
+        a([i r], :) = a([r i], :);        
 
         %Subtract from first row, should gives 0s
         %in the current column below the given row
