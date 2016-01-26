@@ -27,3 +27,11 @@ cpp_tests/Matrix_Tests
 
 ## Running Unit Tests
 - TODO
+
+
+# Idris Code
+##Required
+- Idris 0.10+
+
+## Running Unit Tests
+```idris idris --testpkg numerical_methods.ipkg```
