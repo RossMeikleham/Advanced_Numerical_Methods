@@ -286,4 +286,14 @@ matrix<Type> operator/(matrix<Type> const &m, Type const &c) {
     return m2;
 }
 
+
+matrix<double> zeros(uint64_t m, uint64_t n) {
+    std::vector<double> v = std::vector<double>(m * n, 0);   
+    return matrix<double>(v, n); 
+}
+
+
 #endif
+
+
+

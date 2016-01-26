@@ -5,6 +5,7 @@
 #include "../cpp_src/matrix_factorisations/gram_schmidt.h"
 #include "../cpp_src/matrix_factorisations/gaussian_elimination.h"
 #include "../cpp_src/matrix_factorisations/pivoting_gauss_elimination.h"
+#include "../cpp_src/matrix_factorisations/cholesky_factorisation.h"
 
 #include <vector>
 
@@ -249,3 +250,30 @@ TEST_CASE("Partial Pivoting Gauss Elimination", "[matrix]") {
 }
 
 
+TEST_CASE("Cholesky Factorisation", "[matrix]") {
+    SECTION("3x3") {
+        double ax_a[] = {25, 15, -5, 15, 18, 0, -5, 0, 11};
+        std::vector<double> ax_v(ax_a, ax_a + sizeof(ax_a) / sizeof(double));  
+        auto ax = matrix<double>(ax_v, 3);
+    
+        double actual_a[] = {5, 0, 0, 3, 3, 0, -1, 1, 3};
+        std::vector<double> actual_v(actual_a, actual_a + sizeof(actual_a) / sizeof(double));
+        auto actual = matrix<double>(actual_v, 3);
+    
+        REQUIRE(cholesky(ax).equals(actual, 0.0001));    
+    }    
+   
+    SECTION("4x4") {
+        double ax_a[] = {18, 22, 54, 42, 22, 70, 86, 62, 54, 86, 174, 134, 42, 62, 134, 106};
+        std::vector<double> ax_v(ax_a, ax_a + sizeof(ax_a) / sizeof(double));  
+        auto ax = matrix<double>(ax_v, 4);
+    
+        double actual_a[] = {4.242640, 0, 0, 0, 5.185449, 6.565905, 0, 0, 12.727922, 3.046038, 1.6497422, 0, 9.89949, 1.6245538, 1.84971100, 1.39262124};
+        std::vector<double> actual_v(actual_a, actual_a + sizeof(actual_a) / sizeof(double));
+        auto actual = matrix<double>(actual_v, 4);
+    
+        REQUIRE(cholesky(ax).equals(actual, 0.0001));    
+        
+    }
+    
+}

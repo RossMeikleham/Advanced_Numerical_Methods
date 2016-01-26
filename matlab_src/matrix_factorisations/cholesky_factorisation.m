@@ -11,6 +11,7 @@ function l = cholesky_factorisation(a)
                 for k=1:(i-1)
                     s = s - (l(i, k) ^ 2);
                 end
+                s
                 l(i, i) = sqrt(s);
              
             % i != j
@@ -22,6 +23,7 @@ function l = cholesky_factorisation(a)
                 l(j, i) = s / l(i, i);
             end
         end
+        l
     end
 end
 
