@@ -1,0 +1,6 @@
+package NumericalMethods
+
+sourcedir = idris_src
+modules = Cholesky, Tests.Cholesky
+
+tests = Tests.Cholesky.test3By3Cholesky, Tests.Cholesky.test4By4Cholesky
