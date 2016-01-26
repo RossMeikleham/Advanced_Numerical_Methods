@@ -1,6 +1,8 @@
 #include "matrix.h"
 #include "matrix_factorisations/gram_schmidt.h"
 #include "matrix_factorisations/modified_gram_schmidt.h"
+#include "matrix_factorisations/pivoting_gauss_elimination.h"
+
 #include <complex>
 
 int main(int agrc, char *argv[]) {

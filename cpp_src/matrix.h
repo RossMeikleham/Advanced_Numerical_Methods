@@ -31,7 +31,8 @@ template <class Type> class matrix {
 
     matrix<Type> col(uint64_t col) const {
         std::vector<Type> v = std::vector<Type>(m_m, 0);
-        
+       
+        #pragma omp parallel for 
         for (uint64_t y = 0; y < m_m; y++) {
             v[y] = elements[(y * m_n) + col];          
         }
@@ -41,12 +42,20 @@ template <class Type> class matrix {
 
     matrix<Type> row(uint64_t row) const {
         std::vector<Type> v = std::vector<Type>(m_n, 0);
-
+        
+        #pragma omp parallel for
         for (uint64_t x = 0; x < m_n; x++) {
             v[x] = elements[(row * m_n) + x];
         }
 
         return matrix<Type>(v, m_n);
+    }
+
+    void setRow(uint64_t row, matrix<Type> m) {
+        #pragma omp parallel for
+        for (uint64_t x = 0; x < m_n; x++) {
+            elements[(row * m_n) + x] = m.get(row, x);            
+        }
     }
 
     void transpose() {

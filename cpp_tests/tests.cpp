@@ -4,6 +4,7 @@
 #include "../cpp_src/matrix.h"
 #include "../cpp_src/matrix_factorisations/gram_schmidt.h"
 #include "../cpp_src/matrix_factorisations/gaussian_elimination.h"
+#include "../cpp_src/matrix_factorisations/pivoting_gauss_elimination.h"
 
 #include <vector>
 
@@ -196,7 +197,6 @@ TEST_CASE("Naive Gauss Elimination", "[matrix]") {
         REQUIRE(result == soln);
 
     }
-
  
     SECTION("Naive Gauss Solving") {
         double soln_a[] = {-8, 3};
@@ -205,9 +205,28 @@ TEST_CASE("Naive Gauss Elimination", "[matrix]") {
         
         REQUIRE(result == soln);    
     }
-
 }
 
+/*  
+TEST_CASE("Partial Pivoting Gauss Elimination", "[matrix]") {
+    SECTION("2x3") {    
+        double ax_a[] = {4, 2, 5, 5, 6, 1};
+        std::vector<double> ax_v(ax_a, ax_a + sizeof(ax_a) / sizeof(double));  
+        auto ax = matrix<double>(ax_v, 3);
+    
+        double actual_a[] = {5, 6, 1, 0, -2.8, 4.2};
+        std::vector<double> actual_v(actual_a, actual_a + sizeof(actual_a) / sizeof(double));
+        auto actual = matrix<double>(actual_v, 3);
+         
+        REQUIRE(pivoting_gauss_elimination(ax) == actual);    
+    }
+*/
 
-
-
+/*  
+    SECTION("3x4") {
+        double ax_a[] = {3, 2, -4, 3, 2, 3, 3, 15, 5, -3, 1, 14};
+    }
+    SECTION("4x5") { 
+        double ax_a[] = {2, 1, 1, 0, 1, 4, 3, 3, 1, 2, 8, 7, 9, 5, 3, 6, 7, 9, 8, 4};
+    }
+*/
