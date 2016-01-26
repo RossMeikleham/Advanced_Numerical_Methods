@@ -54,7 +54,7 @@ template <class Type> class matrix {
     void setRow(uint64_t row, matrix<Type> m) {
         #pragma omp parallel for
         for (uint64_t x = 0; x < m_n; x++) {
-            elements[(row * m_n) + x] = m.get(row, x);            
+            elements[(row * m_n) + x] = m.get(0, x);            
         }
     }
 
@@ -91,6 +91,23 @@ template <class Type> class matrix {
         }
 
         return true; 
+    }
+
+    bool equals(matrix<Type> const &m2, Type delta) {
+        // Check dimensional equality
+        if (m_m != m2.m_m || m_n != m2.m_n) {
+            return false;
+        }
+
+        // Check each element is equal
+        for (uint64_t y = 0; y < m_m; y++) {
+            for (uint64_t x = 0; x < m_n; x++) {
+                if (std::abs(elements[(y * m_n) + x] - m2.get(y, x)) > delta) {
+                    return false;
+                }
+            } 
+        }
+        return true;
     }
 
     bool operator!=(matrix<Type> const &m2) const {
